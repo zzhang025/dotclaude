@@ -32,15 +32,35 @@ dotclaude/
 
 ## Bootstrap (New Machine)
 
+> **Windows:** Enable Developer Mode (Settings → System → For developers) to allow unprivileged symlinks, or run Git Bash as Administrator.
+
+**1. Clone the repo**
 ```bash
 git clone git@github.com:<you>/dotclaude.git ~/.claude-config
-cd ~/.claude-config && chmod +x install.sh && ./install.sh
-
-# Authenticate Claude Code
-claude   # → follow login prompt
 ```
 
-> **Windows:** Run Git Bash as Administrator, or enable Developer Mode (Settings → System → For developers) to allow unprivileged symlinks.
+**2. Run the installer**
+```bash
+cd ~/.claude-config
+chmod +x install.sh
+./install.sh
+```
+
+This creates symlinks from the repo into the right locations:
+
+| Repo file | Linked to |
+|---|---|
+| `CLAUDE.md` | `~/.claude/CLAUDE.md` |
+| `settings.json` | `~/.claude/settings.json` |
+| `skills/` | `~/.claude/skills` |
+| `ccstatusline/settings.json` | `~/.config/ccstatusline/settings.json` |
+
+Any existing files at those paths are backed up with a `.bak` suffix automatically.
+
+**3. Authenticate Claude Code**
+```bash
+claude   # → follow login prompt
+```
 
 ## Sync (Existing Machine)
 
