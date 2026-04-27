@@ -7,8 +7,8 @@ description: Set up Husky.Net pre-commit hooks with CSharpier formatting, build 
 
 ## What This Sets Up
 
-- **Husky.Net** pre-commit hook
-- **CSharpier** formatting on staged `.cs` and `.razor` files
+- **Husky.Net** pre-commit hook (NOT Node.js Husky — no npm required)
+- **CSharpier** formatting on staged `.cs` and `.razor` files (NOT `dotnet format` — see Notes)
 - **dotnet build** compile/type checking in the pre-commit hook
 - **dotnet test** in the pre-commit hook
 
@@ -40,6 +40,16 @@ dotnet husky install
 ```
 
 This creates the `.husky/` directory and registers the hook runner.
+
+### 4b. Attach to a project for auto-install
+
+So new developers get hooks automatically when they run `dotnet restore`, attach Husky.Net to your main app project (not the test project):
+
+```bash
+dotnet husky attach <path-to-main-app.csproj>
+```
+
+This adds a `<Target>` to the chosen `.csproj` that runs `dotnet husky install` on restore. Verify the generated `WorkingDirectory` path points correctly to the repo root.
 
 ### 5. Create `.husky/pre-commit`
 
@@ -104,7 +114,9 @@ This will run through the new pre-commit hooks — a good smoke test that everyt
 
 ## Notes
 
-- `dotnet tool restore` re-installs all tools from the manifest — tell contributors to run this after cloning
-- CSharpier handles both `.cs` (C#) and `.razor` (Blazor components) natively
+- `dotnet tool restore` re-installs all tools from the manifest — tell contributors to run this after cloning (or use `dotnet husky attach` so `dotnet restore` handles it automatically)
+- **Use CSharpier, not `dotnet format`**: `dotnet format` has limited support for `.razor` files. CSharpier handles both `.cs` and `.razor` natively and is the Prettier equivalent for .NET/Blazor.
+- **Don't use Node.js Husky**: If the user mentions "lint-staged", use Husky.Net's built-in `include` filtering — not `npm install husky lint-staged`. No Node required.
+- **`--check` mode**: The `csharpier --check` task fails the commit if any file needs formatting — it does NOT auto-format. If the hook fails, the developer must run `dotnet csharpier .` manually, stage the changes, and re-commit.
 - `dotnet build --no-restore` is fast — it skips package restore but still type-checks the whole solution
 - `dotnet test --no-build` skips rebuilding, relying on the build step above
