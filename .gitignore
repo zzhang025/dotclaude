@@ -1,0 +1,6 @@
+# Runtime data — never commit
+.credentials.json
+settings.local.json
+projects/
+statsig/
+*.jsonl
