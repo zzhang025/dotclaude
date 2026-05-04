@@ -35,7 +35,7 @@ skill-name/
 ├── REFERENCE.md       # Detailed docs (if needed)
 ├── EXAMPLES.md        # Usage examples (if needed)
 └── scripts/           # Utility scripts (if needed)
-    └── helper.js
+    └── helper.sh
 ```
 
 ## SKILL.md Template

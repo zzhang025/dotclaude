@@ -72,3 +72,19 @@ cd ~/.claude-config && git pull
 ## Machine-Specific Overrides
 
 Use `~/.claude/settings.local.json` (gitignored) for machine-specific settings like local tool paths.
+
+## New Feature Workflow
+
+End-to-end workflow using the skills in this repo:
+
+| Step | Skill | What it does |
+|------|-------|-------------|
+| 1 | `/write-a-prd` | Write the spec and file it as a GitHub issue |
+| 2 | `/grill-me` | Stress-test the plan (optional) |
+| 3 | `/design-an-interface` | Explore interface options if building a new module or API |
+| 4 | `@<PRD issue> /to-issues` | Break the PRD into independently-workable GitHub issues |
+| 5 | `@<issue> /tdd` | Implement each issue with red-green-refactor |
+| 6 | `/qa` | Report bugs conversationally; Claude files structured issues |
+| 7 | `/improve-codebase-architecture` | Post-feature cleanup (optional) |
+
+**Frontend features:** add `/frontend-design` before `/tdd` for any UI issue.

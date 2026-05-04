@@ -4,14 +4,16 @@
 
 **Integration-style**: Test through real interfaces, not mocks of internal parts.
 
-```typescript
+```csharp
 // GOOD: Tests observable behavior
-test("user can checkout with valid cart", async () => {
-  const cart = createCart();
-  cart.add(product);
-  const result = await checkout(cart, paymentMethod);
-  expect(result.status).toBe("confirmed");
-});
+[Fact]
+public async Task UserCanCheckoutWithValidCart()
+{
+    var cart = new Cart();
+    cart.Add(product);
+    var result = await checkout.Execute(cart, paymentMethod);
+    Assert.Equal("confirmed", result.Status);
+}
 ```
 
 Characteristics:
@@ -26,13 +28,15 @@ Characteristics:
 
 **Implementation-detail tests**: Coupled to internal structure.
 
-```typescript
+```csharp
 // BAD: Tests implementation details
-test("checkout calls paymentService.process", async () => {
-  const mockPayment = jest.mock(paymentService);
-  await checkout(cart, payment);
-  expect(mockPayment.process).toHaveBeenCalledWith(cart.total);
-});
+[Fact]
+public async Task CheckoutCallsPaymentServiceProcess()
+{
+    var mockPayment = Substitute.For<IPaymentService>();
+    await checkout.Execute(cart, payment);
+    await mockPayment.Received().Process(cart.Total);
+}
 ```
 
 Red flags:
@@ -44,18 +48,23 @@ Red flags:
 - Test name describes HOW not WHAT
 - Verifying through external means instead of interface
 
-```typescript
+```csharp
 // BAD: Bypasses interface to verify
-test("createUser saves to database", async () => {
-  await createUser({ name: "Alice" });
-  const row = await db.query("SELECT * FROM users WHERE name = ?", ["Alice"]);
-  expect(row).toBeDefined();
-});
+[Fact]
+public async Task CreateUserSavesToDatabase()
+{
+    await userService.Create(new CreateUserRequest { Name = "Alice" });
+    var row = await db.QuerySingleOrDefaultAsync(
+        "SELECT * FROM users WHERE name = @name", new { name = "Alice" });
+    Assert.NotNull(row);
+}
 
 // GOOD: Verifies through interface
-test("createUser makes user retrievable", async () => {
-  const user = await createUser({ name: "Alice" });
-  const retrieved = await getUser(user.id);
-  expect(retrieved.name).toBe("Alice");
-});
+[Fact]
+public async Task CreateUserMakesUserRetrievable()
+{
+    var user = await userService.Create(new CreateUserRequest { Name = "Alice" });
+    var retrieved = await userService.GetById(user.Id);
+    Assert.Equal("Alice", retrieved.Name);
+}
 ```
