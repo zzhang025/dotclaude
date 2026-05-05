@@ -15,6 +15,8 @@ description: Test-driven development with red-green-refactor loop. Use when user
 
 See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
 
+For **Blazor component testing**, see [frontend-blazor.md](frontend-blazor.md). The same red-green-refactor loop applies, but the test surface is rendered HTML and user interactions (via bUnit) rather than method return values.
+
 ## Anti-Pattern: Horizontal Slices
 
 **DO NOT write all tests first, then all implementation.** This is "horizontal slicing" - treating RED as "write all tests" and GREEN as "write all code."
@@ -52,6 +54,13 @@ Before writing any code:
 - [ ] Design interfaces for [testability](interface-design.md)
 - [ ] List the behaviors to test (not implementation steps)
 - [ ] Get user approval on the plan
+
+If working on **Blazor components**, also ask:
+- Is this component BE-logic-heavy (services, data fetching) or UI-behavior-heavy (interactions, display logic)?
+- Which injected services need to be mocked vs. used for real?
+- What does the user _see_ or _do_ that proves each behavior works?
+
+See [frontend-blazor.md](frontend-blazor.md) for bUnit patterns.
 
 Ask: "What should the public interface look like? Which behaviors are most important to test?"
 
