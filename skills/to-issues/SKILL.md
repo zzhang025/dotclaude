@@ -50,13 +50,57 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Publish the issues to the issue tracker
+### 5. Detect the issue tracker
 
-For each approved slice, publish a new issue to the issue tracker. Apply the `needs-triage` label so each issue enters the normal triage flow.
+Before publishing, check whether a remote issue tracker is available:
+
+- Run `git remote -v` to see if a GitHub/GitLab remote exists.
+- If a GitHub remote is present, use it as the issue tracker (proceed as normal below).
+- If **no remote is found**, fall back to a local `ISSUES.md` file (see Local Fallback below).
+
+### 6. Publish the issues
+
+#### Remote tracker (GitHub)
+
+For each approved slice, publish a new issue. Apply the `needs-triage` label so each issue enters the normal triage flow.
 
 Publish issues in **dependency order** (blockers first) so you can reference real issue identifiers in the "Blocked by" field.
 
-Use this issue body template:
+#### Local fallback (`ISSUES.md`)
+
+If no remote tracker exists, write all issues to `ISSUES.md` in the project root. Append if the file already exists; create it if it doesn't.
+
+Use this structure:
+
+```markdown
+# Issues
+
+## [#N] <Title>
+
+**Type:** HITL / AFK
+**Status:** Open
+
+### What to build
+
+A concise description of this vertical slice.
+
+### Acceptance criteria
+
+- [ ] Criterion 1
+- [ ] Criterion 2
+
+### Blocked by
+
+- #M <Title of blocking issue>, or "None - can start immediately"
+```
+
+Number issues sequentially, starting from 1 (or continuing from the highest existing `#N` in the file).
+
+After writing, tell the user: "No remote issue tracker detected — issues written to `ISSUES.md`."
+
+---
+
+Use this issue body template for both remote and local:
 
 ```markdown
 ## Parent
