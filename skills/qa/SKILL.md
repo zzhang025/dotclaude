@@ -44,9 +44,16 @@ Keep as a single issue when:
 - It's one behavior that's wrong in one place
 - The symptoms are all caused by the same root behavior
 
-### 4. File the GitHub issue(s)
+### 4. Ask where to file, then file
 
-Create issues with `gh issue create`. Do NOT ask the user to review first — just file and share URLs.
+Before writing, ask the user **once**:
+
+> "File locally as a markdown file, or create a GitHub issue?"
+
+- **Local**: Write to `issues/<slug>.md` at the solution/project root using the Write tool. Share the file path when done.
+- **GitHub**: Create with `gh issue create`. Share the issue URL when done.
+
+Remember the answer for the rest of the session — do not ask again for subsequent issues.
 
 Issues must be **durable** — they should still make sense after major refactors. Write from the user's perspective.
 
@@ -123,7 +130,7 @@ When creating a breakdown:
 - **Reproduction steps are mandatory** — if you can't determine them, ask the user
 - **Keep it concise** — a developer should be able to read the issue in 30 seconds
 
-After filing, print all issue URLs (with blocking relationships summarized) and ask: "Next issue, or are we done?"
+After filing, print all file paths or URLs (with blocking relationships summarized if a breakdown) and ask: "Next issue, or are we done?"
 
 ### 5. Continue the session
 
