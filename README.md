@@ -83,8 +83,8 @@ End-to-end workflow using the skills in this repo:
 | 2 | `/grill-me` | Stress-test the plan (optional) |
 | 3 | `/design-an-interface` | Explore interface options if building a new module or API |
 | 4 | `@<PRD issue> /to-issues` | Break the PRD into independently-workable GitHub issues |
-| 5 | `@<issue> /tdd` | Implement each issue with red-green-refactor |
+| 5 | `@<issue> /tdd-blazor` (or `/tdd-js`) | Implement each issue with red-green-refactor |
 | 6 | `/qa` | Report bugs conversationally; Claude files structured issues |
 | 7 | `/improve-codebase-architecture` | Post-feature cleanup (optional) |
 
-**Frontend features:** add `/frontend-design` before `/tdd` for any UI issue.
+**Frontend features:** add `/frontend-design` before `/tdd-blazor` (or `/tdd-js`) for any UI issue.
