@@ -1,6 +1,6 @@
 ---
-name: setup-pre-commit
-description: Set up Husky.Net pre-commit hooks with CSharpier formatting, build checking, and tests in a .NET or Blazor repo. Use when user wants to add pre-commit hooks, set up Husky.Net, configure CSharpier, or add commit-time formatting/build-checking/testing to a .NET project.
+name: setup-pre-commit-blazor
+description: Blazor and .NET version, for C# / .NET / Blazor projects. Set up Husky.Net pre-commit hooks with CSharpier formatting, build checking, and tests in a .NET or Blazor repo. Use when user wants to add pre-commit hooks, set up Husky.Net, configure CSharpier, or add commit-time formatting/build-checking/testing to a .NET project.
 ---
 
 # Setup Pre-Commit Hooks (.NET / Blazor)

@@ -5,7 +5,7 @@ description: Write a Product Requirements Document (PRD) and file it as a GitHub
 
 # Write a PRD
 
-Produces a GitHub issue PRD that /tdd can execute against. Uses grill-me style interviewing to reach shared understanding before writing.
+Produces a GitHub issue PRD that /tdd-blazor or /tdd-js can execute against. Uses grill-me style interviewing to reach shared understanding before writing.
 
 ## Steps
 
